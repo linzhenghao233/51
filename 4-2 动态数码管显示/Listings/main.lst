@@ -1,0 +1,76 @@
+C51 COMPILER V9.54   MAIN                                                                  06/05/2023 18:42:21 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: d:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.h>
+   2          
+   3          void nixie(unsigned int, unsigned int);
+   4          void Delay(unsigned int time_ms);
+   5          unsigned int nixie_table[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D,
+   6          0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x00};
+   7          
+   8          int main(void){
+   9   1        //int i = 1;
+  10   1        while(1){
+  11   2          /*nixie(i++,6);
+  12   2          if(i == 9)
+  13   2            i = 1;
+  14   2          
+  15   2          Delay(100);*/
+  16   2          nixie(1, 1);
+  17   2          //Delay(20);
+  18   2          nixie(2, 2);
+  19   2          //Delay(20);
+  20   2          nixie(3, 3);
+  21   2          //Delay(20);
+  22   2        }
+  23   1      }
+  24          
+  25          void nixie(unsigned int location, unsigned int number){
+  26   1        switch(location){
+  27   2          case 1:P2_4 = 1; P2_3 = 1; P2_2 = 1;break;
+  28   2          case 2:P2_4 = 1; P2_3 = 1; P2_2 = 0;break;
+  29   2          case 3:P2_4 = 1; P2_3 = 0; P2_2 = 1;break;
+  30   2          case 4:P2_4 = 1; P2_3 = 0; P2_2 = 0;break;
+  31   2          case 5:P2_4 = 0; P2_3 = 1; P2_2 = 1;break;
+  32   2          case 6:P2_4 = 0; P2_3 = 1; P2_2 = 0;break;
+  33   2          case 7:P2_4 = 0; P2_3 = 0; P2_2 = 1;break;
+  34   2          case 8:P2_4 = 0; P2_3 = 0; P2_2 = 0;break;
+  35   2        }
+  36   1        P0 = nixie_table[number];
+  37   1        Delay(0.5);
+  38   1        P0 = 0x00;
+  39   1      }
+  40          
+  41          void Delay(unsigned int time_ms){   //@12.000MHz
+  42   1        unsigned char i, j;
+  43   1        while(time_ms--){
+  44   2          i = 2;
+  45   2          j = 239;
+  46   2          do{
+  47   3            while (--j);
+  48   3          } while (--i);
+  49   2        }
+  50   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    166    ----
+C51 COMPILER V9.54   MAIN                                                                  06/05/2023 18:42:21 PAGE 2   
+
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     34    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
