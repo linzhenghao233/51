@@ -1,0 +1,50 @@
+C51 COMPILER V9.54   MAIN                                                                  06/06/2023 17:09:43 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: d:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.h>
+   2          #include "LCD1602.h"
+   3          #include "delay.h"
+   4          
+   5          int result = 0;
+   6          
+   7          int main(void){
+   8   1        LCD_Init();//初始化
+   9   1        /*
+  10   1        LCD_ShowChar(1, 1, 'A');//行，列，字符
+  11   1        LCD_ShowString(1, 3, "Hello");
+  12   1        LCD_ShowNum(1, 9, 123, 4);//行，列，十进制数字，显示位数(多截取，少0补)
+  13   1        LCD_ShowSignedNum(1, 14, -66, 2);//有符号的十进制数字，符号没有包括在位数里
+  14   1        LCD_ShowHexNum(2, 1, 0xA8, 2);//十六进制
+  15   1        LCD_ShowBinNum(2, 4, 0xAA, 8);//二进制
+  16   1        */
+  17   1        
+  18   1        /*
+  19   1        result = 1 + 1;
+  20   1        LCD_ShowNum(1, 1, result, 3);
+  21   1        */
+  22   1        while(1){
+  23   2          LCD_ShowNum(1, 1, result++, 3);
+  24   2          Delay(1000);
+  25   2        }
+  26   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     34    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
