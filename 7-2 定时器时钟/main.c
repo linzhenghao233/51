@@ -29,12 +29,12 @@ void Timer0_Routine() interrupt 1{
 		if(second == 60){
 			second = 0;
 			min++;
-		}
-		if(min == 60){
-			min = 0;
-			hour++;
-		}
-		if(hour = 24)
-			hour = 0;
+			if(min == 60){
+				min = 0;
+				hour++;
+				if(hour == 24)
+					hour = 0;
+			}
+		}	
 	}
 }

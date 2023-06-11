@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  06/11/2023 23:08:20 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  06/12/2023 00:40:08 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -39,20 +39,19 @@ line level    source
   29   2          if(second == 60){
   30   3            second = 0;
   31   3            min++;
-  32   3          }
-  33   2          if(min == 60){
-  34   3            min = 0;
-  35   3            hour++;
-  36   3          }
-  37   2          if(hour = 24)
-*** WARNING C276 IN LINE 37 OF main.c: constant in condition expression
-  38   2            hour = 0;
+  32   3            if(min == 60){
+  33   4              min = 0;
+  34   4              hour++;
+  35   4              if(hour == 24)
+  36   4                hour = 0;
+  37   4            }
+  38   3          } 
   39   2        }
   40   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    145    ----
+   CODE SIZE        =    147    ----
    CONSTANT SIZE    =     14    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -62,4 +61,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
