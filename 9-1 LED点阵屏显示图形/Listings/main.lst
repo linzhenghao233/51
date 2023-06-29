@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  06/28/2023 23:35:08 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  06/29/2023 23:47:23 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -9,20 +9,69 @@ COMPILER INVOKED BY: d:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE 
 line level    source
 
    1          #include <REGX52.h>
-   2          
-   3          sbit RCK = P3^5;
-   4          sbit SCK = P3^6;
-   5          sbit SER = P3^4;
-   6          
-   7          int main(void){
-   8   1        while(1){
-   9   2          
-  10   2        }
-  11   1      }
+   2          #include "Delay.h"
+   3          
+   4          sbit RCK = P3^5;  //RCLK
+   5          sbit SCK = P3^6;  //SRCLK
+   6          sbit SER = P3^4;  //SER
+   7          
+   8          #define MATRIX_LED_PORT P0
+   9          
+  10          void _74HC595_WriteByte(unsigned char Byte);
+  11          void MatrixLED_ShowColimn(unsigned char Column,Data);
+  12          
+  13          int main(void){
+  14   1        SCK = 0;
+  15   1        RCK = 0;
+  16   1        
+  17   1        while(1){
+  18   2          MatrixLED_ShowColimn(0, 0x3C);
+  19   2          MatrixLED_ShowColimn(1, 0x42);
+  20   2          MatrixLED_ShowColimn(2, 0xA9);
+  21   2          MatrixLED_ShowColimn(3, 0x85);
+  22   2          MatrixLED_ShowColimn(4, 0x85);
+  23   2          MatrixLED_ShowColimn(5, 0xA9);
+  24   2          MatrixLED_ShowColimn(6, 0x42);
+  25   2          MatrixLED_ShowColimn(7, 0x3C);
+  26   2        }
+  27   1      }
+  28          
+  29          /**
+  30            * @brief 74HC595写入一个字节
+  31            * @param 要写入的字节
+  32            * @retval 无
+  33            */
+  34          
+  35          void _74HC595_WriteByte(unsigned char Byte){
+  36   1        unsigned char i;
+  37   1        for(i = 0; i < 8; i++){
+  38   2          SER = Byte & (0x80 >> i);
+  39   2          SCK = 1;
+  40   2          SCK = 0;
+  41   2        }
+  42   1        RCK = 1;
+  43   1        RCK = 0;
+  44   1      }
+  45          
+  46          /**
+  47            * @brief LED点阵屏显示一列数据
+  48            * @param Column要选择的列，范围：0~7，0在最左边
+  49            * @param Data选择列显示的数据，高位在上，1为亮，0为灭
+  50            * @retval 无
+  51            */
+  52          
+  53          void MatrixLED_ShowColimn(unsigned char Column,Data){
+  54   1        _74HC595_WriteByte(Data);
+C51 COMPILER V9.54   MAIN                                                                  06/29/2023 23:47:23 PAGE 2   
+
+  55   1        MATRIX_LED_PORT = ~(0x80 >> Column);
+  56   1        Delay(1);
+  57   1        MATRIX_LED_PORT = 0xFF;
+  58   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =      2    ----
+   CODE SIZE        =    157    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
