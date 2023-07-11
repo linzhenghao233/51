@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  07/10/2023 22:54:19 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  07/11/2023 23:00:02 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -19,19 +19,18 @@ line level    source
    9   1        LCD_Init();
   10   1        DS1302_Init();
   11   1        LCD_ShowString(1, 1, "hello");
-  12   1        DS1302_WriteByte(0x8E, 0x00);
+  12   1        DS1302_WriteByte(0x8E, 0x00);//解除写入保护
   13   1        DS1302_WriteByte(0x80, 0x03);
   14   1      
   15   1        while(1){
   16   2          Second = DS1302_ReadByte(0x81);
-  17   2          LCD_ShowNum(2, 1, Second, 3);
-  18   2          Delay(1000);
-  19   2        }
-  20   1      }
+  17   2          LCD_ShowHexNum(2, 1, Second, 3);
+  18   2        }
+  19   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     66    ----
+   CODE SIZE        =     59    ----
    CONSTANT SIZE    =      6    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
