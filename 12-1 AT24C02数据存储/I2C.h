@@ -1,4 +1,4 @@
-#idndef __I2C_H__
+#ifndef __I2C_H__
 #define __I2C_H__
 
 void I2C_Start(void);

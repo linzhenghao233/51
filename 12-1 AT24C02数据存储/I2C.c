@@ -46,7 +46,7 @@ void I2C_SendByte(unsigned char Byte){
   * @retval	接收到的一个字节数据
   */
 unsigned char I2C_ReceiveByte(void){
-	unsigned char Byte = 0x00;
+	unsigned char i, Byte = 0x00;
 	
 	I2C_SDA = 1;
 	for(i = 0; i < 8; i++){
@@ -75,7 +75,7 @@ void I2C_SendAck(unsigned char AckBit){
 	* @retval	接收到的应答位，0为应答，1为非应答
   */
 unsigned char I2C_ReceiveAck(void){
-	unsigned char AckBi;
+	unsigned char AckBit;
 	
 	I2C_SDA = 1;
 	I2C_SCL = 1;
