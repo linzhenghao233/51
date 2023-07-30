@@ -6,7 +6,7 @@
   * @retval	无
   */
 
-void Timer0Init(void)		//1毫秒@11.0592MHz
+void Timer0_Init(void)		//1毫秒@11.0592MHz
 {
 	TMOD &= 0xF0;		//设置定时器模式
 	TMOD |= 0x01;		//设置定时器模式
